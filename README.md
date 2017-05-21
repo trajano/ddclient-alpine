@@ -164,8 +164,7 @@ and verify that the container has created a file called `ddclient.cache` in it. 
 * `kubectl get pvc` - See all persistent volume claims in your cluster (in the default namespace)
 * `kubectl delete -f deployment-persistent.yaml` - Shut down the deployment and delete everything including the
    persistent volume claim against the **ddclient** persistent volume.
-* `kubectl delete -f secret.yaml` - Delete the ddclient-secret that holds your encoded username and password.  Again, you'll
-   need to run this from the directory where your modified `secret.yaml` file resides.
+* `kubectl delete -f secret.yaml` - Delete the ddclient-secret that holds your encoded username and password.
 
 ## Image
 This Docker image lives on the official Docker Hub at [steasdal/ddclient-alpine](https://hub.docker.com/r/steasdal/ddclient-alpine/)
