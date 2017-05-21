@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ddclient-persistent-volume-claim
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi
+  storageClassName: ddclient
+
+---
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ddclient-deployment
+spec:
+  replicas: 1 # Request a single replica
+  template:
+    metadata:
+      labels:
+        app: ddclient
+    spec:
+      containers:
+      - name: ddclient
+        image: steasdal/ddclient-alpine:latest
+        volumeMounts:
+        - mountPath: "/var/cache/ddclient"
+          name: ddclient-pvc
+        env:
+        - name: DDNS_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: ddclient-secret
+              key: username
+        - name: DDNS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ddclient-secret
+              key: password
+        - name: DDNS_DAEMON_OR_ONESHOT
+          value: "<daemon -OR- oneshot>"
+        - name: DDNS_AUTOPUBLIC_OR_INTERFACE
+          value: "<autopublic -OR- interface>"
+        - name: DDNS_SERVER
+          value: "<PUT YOUR DDNS PROVIDER'S UPDATE HOSTNAME HERE (e.g. api.dynu.com)>"
+        - name: DDNS_DOMAIN
+          value: "<PUT YOUR DOMAIN NAME HERE (e.g. my.address.net)>"
+        - name: DDNS_CHECKIP_URL
+          value: "<OPTIONAL - URL OF YOUR DDNS PROVIDER'S IP CHECK PAGE (defaults to checkip.dyndns.com)>"
+        - name: DDNS_DAEMON_REFRESH_INTERVAL
+          value: "<OPTIONAL - DAEMON REFRESH INTERVAL IN SECONDS (defaults to 30)>"
+      volumes:
+        - name: ddclient-pvc
+          persistentVolumeClaim:
+            claimName: ddclient-persistent-volume-claim
+
