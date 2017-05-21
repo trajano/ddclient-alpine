@@ -152,9 +152,9 @@ Once you've got a Persistent Volume called **ddclient** in place, you're ready t
     ```bash
     kubectl create -f secret.yaml
     ```
-5. Create the ddclient-alpine deployment with persistent storage off the ddclient cache file:
+5. Create the ddclient-alpine deployment with persistent storage for the ddclient cache file:
     ```bash
-    kubectl apply -f deployment.yaml
+    kubectl apply -f deployment-persistent.yaml
     ```
 
 Once the container is up and running, check the logs to make sure everything looks good.  Check your Persistent Volume
