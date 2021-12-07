@@ -3,6 +3,8 @@ Run [ddclient](https://sourceforge.net/p/ddclient/wiki/Home/) in an alpine docke
 This'll update your [DDNS](https://en.wikipedia.org/wiki/Dynamic_DNS) provider with your
 external IP address in the event that it changes.
 
+Forked to have multi-architecture support.
+
 ## Usage
 
 ### Run with docker
@@ -20,7 +22,7 @@ docker run \
        -e "DDNS_AUTOPUBLIC_OR_INTERFACE=autopublic" \
        -e "DDNS_CHECKIP_URL=checkip.dyndns.com" \
        -e "DDNS_DAEMON_REFRESH_INTERVAL=30" \
-       steasdal/ddclient-alpine
+       ghcr.io/trajano/ddclient-alpine
 ```
 
 The `DDNS_CHECKIP_URL` and `DDNS_DAEMON_REFRESH_INTERVAL` environment variables are optional and will 
