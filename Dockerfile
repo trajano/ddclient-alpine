@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.12
 
 RUN apk upgrade --no-cache
 RUN apk add --no-cache perl perl-io-socket-ssl ca-certificates openssl
