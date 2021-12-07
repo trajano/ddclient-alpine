@@ -20,7 +20,7 @@ jobs:
       - name: Prepare
         id: prep
         run: |
-          DOCKER_IMAGE=${{ github.actor }}/${GITHUB_REPOSITORY#*/}
+          DOCKER_IMAGE=${REGISTRY}/${{ github.actor }}/${GITHUB_REPOSITORY#*/}
           VERSION=latest
           SHORTREF=${GITHUB_SHA::8}
 
