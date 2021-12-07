@@ -1,8 +1,8 @@
 FROM alpine:latest
 
 RUN apk upgrade --no-cache
-COPY ddclient /usr/sbin/ddclient
 RUN apk add --no-cache perl perl-io-socket-ssl nano
-COPY ddclient.conf /etc/ddclient.conf.original
+COPY ddclient /usr/sbin/ddclient
 COPY entrypoint.sh /entrypoint.sh
+COPY ddclient.conf /etc/ddclient.conf.original
 CMD ["/entrypoint.sh"]
